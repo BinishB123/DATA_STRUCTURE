@@ -21,6 +21,29 @@
           this.tail = null;
         }
 
+
+        deleteByValue(value){
+           
+            let curr = this.head
+            while (curr) {
+                if (value===this.head.value) {
+                  this.head = this.head.next
+                  this.head.prev = null
+                }else if (this.tail.value===value) {
+                    this.tail = this.tail.prev
+                    this.tail.next = null
+                 }else if (curr.value===value) {
+        
+                    curr.prev.next = curr.next
+                    curr.next.prev = curr.prev
+                    return
+                }
+                curr = curr.next
+            }
+        
+           }
+   
+
         prepend(value){
             const node = new Node(value)
           if (!this.head) {
@@ -55,14 +78,15 @@
           console.log(value);
         }
       }
-     
+
+    
 
 
     const dl = new DoubleLinkedList()
     for(let i = 1 ;i<=5;i++){
         dl.append(i)
     }
-    dl.prepend(90)
+    // dl.deleteByValue(3)
     dl.print()
     console.log(dl.head);
     
