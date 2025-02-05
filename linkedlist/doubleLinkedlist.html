@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DobleLinkedList</title>
+  </head>
+  <body>
+    <script>
+      class Node {
+        constructor(value) {
+          this.prev = null;
+          this.value = value;
+          this.next = null;
+        }
+      }
+
+      class DoubleLinkedList {
+        constructor() {
+          this.head = null;
+          this.tail = null;
+        }
+
+        prepend(value){
+            const node = new Node(value)
+          if (!this.head) {
+            this.head = node
+            this.tail = node
+            return
+          }
+          node.next = this.head
+          this.head.prev = node
+          this.head = node
+        }
+
+        append(value) {
+          const node = new Node(value);
+          if (!this.head) {
+            this.head = node;
+            this.tail = node;
+            return
+          }
+          node.prev = this.tail;
+          this.tail.next = node;
+          this.tail = node;
+        }
+
+        print() {
+          let value = "";
+          let node = this.head;
+          while (node) {
+            value += ` ->  ${node.value}`;
+            node = node.next;
+          }
+          console.log(value);
+        }
+      }
+     
+
+
+    const dl = new DoubleLinkedList()
+    for(let i = 1 ;i<=5;i++){
+        dl.append(i)
+    }
+    dl.prepend(90)
+    dl.print()
+    console.log(dl.head);
+    
+    
+
+
+    </script>
+  </body>
+</html>
