@@ -65,6 +65,28 @@
           this.head = node;
         }
 
+        removeOddNumber() {
+          let curr = this.head;
+          while (curr) {
+            let nextOdd = curr.next;
+            if (curr.value % 2 === 0) {
+             if (this.head.value===curr.value) {
+                this.head = this.head.next
+                this.head.prev = null
+             }else if (this.tail.value == curr.value) {
+                this.tail = this.tail.prev;
+                this.tail.next = null;
+              } else {
+                curr.prev.next = curr.next;
+                curr.next.prev = curr.prev;
+              }
+              curr = nextOdd;
+            } else {
+              curr = curr.next;
+            }
+          }
+        }
+
         removeDuplicates() {
           let curr = this.head;
 
@@ -73,9 +95,9 @@
             while (dup) {
               if (dup.value === curr.value) {
                 let nextDup = dup.next;
-                if (this.tail.value===curr.value) {
-                  this.tail= this.tail.prev
-                  this.tail.next = null  
+                if (this.tail.value === curr.value) {
+                  this.tail = this.tail.prev;
+                  this.tail.next = null;
                 }
                 dup.next.prev = dup.prev;
                 dup.prev.next = dup.next;
@@ -110,7 +132,7 @@
         }
       }
 
-      let numbers = [1, 1,2, 3, 4, 5, 2, 6, 3, 7, 8, 5, 9, 10];
+      let numbers = [1, 1, 2, 3, 4, 5, 2, 6, 3, 7, 8, 5, 9, 10];
       const dl = new DoubleLinkedList();
       numbers.forEach((data) => {
         dl.append(data);
@@ -119,7 +141,7 @@
       // dl.deleteByValue(3)
       // dl.reverse()
       dl.print();
-      dl.removeDuplicates();
+      dl.removeOddNumber();
       dl.print();
       console.log(dl.head);
     </script>
