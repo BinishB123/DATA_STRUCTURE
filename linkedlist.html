@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    class Node {
+      constructor(value) {
+        this.value = value;
+        this.next = null;
+      }
+    }
+
+    class LinkedList {
+      constructor() {
+        this.head = null;
+        
+      }
+
+      
+      
+      
+
+
+
+
+      findTheLargest(){
+        let node = this.head
+        let max = -Infinity
+        let secondMax = -Infinity
+        while (node) {
+            if (node.value>max) {
+                secondMax = max
+                max= node.value
+            }else if (node.value>secondMax&&node.value<max) {                
+                secondMax = node.value
+            }
+          node = node.next  
+        }
+        
+        return secondMax
+      }
+
+      append(value) {
+        const node = new Node(value);
+        if (!this.head) {
+          this.head = node;
+          return;
+        }
+        let nodes = this.head;
+
+        while (nodes.next) {
+          nodes = nodes.next;
+        }
+        nodes.next = node;
+      }
+
+      print() {
+        let value = "";
+        let node = this.head;
+        while (node) {
+          value += ` ${node.value}`;
+          node = node.next;
+        }
+      }
+
+      prepend(value) {
+        const node = new Node(value);
+        if (!this.head) {
+          this.head = node;
+          return;
+        }
+        node.next = this.head;
+        this.head = node;
+      }
+
+      deleteByValue(value){
+        if (this.head.value===value) {
+            return this.head = this.head.next
+        }
+        let curr = this.head.next
+        let prev = this.head
+        while (curr) {
+            if (curr.value===value) {
+                prev.next = curr.next
+            }else{
+                prev = curr
+            }
+            curr = curr.next
+        }
+       
+      }
+
+    }
+
+    const ll = new LinkedList();
+    for (let i= 0; i < 11; i++) {
+      ll.append(i)
+        
+    }
+    ll.deleteByValue(3)
+   ll.print()
+   console.log(ll.findTheLargest());
+   
+    console.log(ll.head);
+  </script>
+</html>
