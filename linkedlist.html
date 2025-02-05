@@ -17,31 +17,32 @@
     class LinkedList {
       constructor() {
         this.head = null;
-        
       }
 
-      
-      
-      
-
-
-
-
-      findTheLargest(){
-        let node = this.head
-        let max = -Infinity
-        let secondMax = -Infinity
-        while (node) {
-            if (node.value>max) {
-                secondMax = max
-                max= node.value
-            }else if (node.value>secondMax&&node.value<max) {                
-                secondMax = node.value
-            }
-          node = node.next  
+      findTheMiddleElement() {
+        let firstRunner = this.head;
+        let secondRunner = this.head;
+        while (secondRunner && secondRunner.next) {
+          firstRunner = firstRunner.next;
+          secondRunner = secondRunner.next.next;
         }
-        
-        return secondMax
+        console.log("middleElement", firstRunner.value);
+      }
+
+      findTheSecondLargest() {
+        let node = this.head;
+        let max = -Infinity;
+        let secondMax = -Infinity;
+        while (node) {
+          if (node.value > max) {
+            secondMax = max;
+            max = node.value;
+          } else if (node.value > secondMax && node.value < max) {
+            secondMax = node.value;
+          }
+          node = node.next;
+        }
+        console.log("second largest element", secondMax);
       }
 
       append(value) {
@@ -55,6 +56,7 @@
         while (nodes.next) {
           nodes = nodes.next;
         }
+
         nodes.next = node;
       }
 
@@ -62,9 +64,10 @@
         let value = "";
         let node = this.head;
         while (node) {
-          value += ` ${node.value}`;
+          value += ` ->  ${node.value}`;
           node = node.next;
         }
+        console.log(value);
       }
 
       prepend(value) {
@@ -77,34 +80,31 @@
         this.head = node;
       }
 
-      deleteByValue(value){
-        if (this.head.value===value) {
-            return this.head = this.head.next
+      deleteByValue(value) {
+        if (this.head.value === value) {
+          return (this.head = this.head.next);
         }
-        let curr = this.head.next
-        let prev = this.head
+        let curr = this.head.next;
+        let prev = this.head;
         while (curr) {
-            if (curr.value===value) {
-                prev.next = curr.next
-            }else{
-                prev = curr
-            }
-            curr = curr.next
+          if (curr.value === value) {
+            prev.next = curr.next;
+            return;
+          }
+          prev = curr;
+          curr = curr.next;
         }
-       
       }
-
     }
 
     const ll = new LinkedList();
-    for (let i= 0; i < 11; i++) {
-      ll.append(i)
-        
+    for (let i = 1; i <= 3; i++) {
+      ll.append(i);
     }
-    ll.deleteByValue(3)
-   ll.print()
-   console.log(ll.findTheLargest());
-   
+    ll.deleteByValue(4);
+    ll.print();
+    ll.findTheMiddleElement();
+    ll.findTheSecondLargest();
     console.log(ll.head);
   </script>
 </html>
