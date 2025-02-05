@@ -21,39 +21,70 @@
           this.tail = null;
         }
 
-
-        deleteByValue(value){
-           
-            let curr = this.head
-            while (curr) {
-                if (value===this.head.value) {
-                  this.head = this.head.next
-                  this.head.prev = null
-                }else if (this.tail.value===value) {
-                    this.tail = this.tail.prev
-                    this.tail.next = null
-                 }else if (curr.value===value) {
-        
-                    curr.prev.next = curr.next
-                    curr.next.prev = curr.prev
-                    return
-                }
-                curr = curr.next
-            }
-        
-           }
-   
-
-        prepend(value){
-            const node = new Node(value)
-          if (!this.head) {
-            this.head = node
-            this.tail = node
-            return
+        reverse() {
+          let curr = this.head;
+          let next = null;
+          let prev = null;
+          while (curr) {
+            curr.prev = curr.next;
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
           }
-          node.next = this.head
-          this.head.prev = node
-          this.head = node
+          this.head = prev;
+        }
+
+        deleteByValue(value) {
+          let curr = this.head;
+          while (curr) {
+            if (value === this.head.value) {
+              this.head = this.head.next;
+              this.head.prev = null;
+            } else if (this.tail.value === value) {
+              this.tail = this.tail.prev;
+              this.tail.next = null;
+            } else if (curr.value === value) {
+              curr.prev.next = curr.next;
+              curr.next.prev = curr.prev;
+              return;
+            }
+            curr = curr.next;
+          }
+        }
+
+        prepend(value) {
+          const node = new Node(value);
+          if (!this.head) {
+            this.head = node;
+            this.tail = node;
+            return;
+          }
+          node.next = this.head;
+          this.head.prev = node;
+          this.head = node;
+        }
+
+        removeDuplicates() {
+          let curr = this.head;
+
+          while (curr) {
+            let dup = curr.next;
+            while (dup) {
+              if (dup.value === curr.value) {
+                let nextDup = dup.next;
+                if (this.tail.value===curr.value) {
+                  this.tail= this.tail.prev
+                  this.tail.next = null  
+                }
+                dup.next.prev = dup.prev;
+                dup.prev.next = dup.next;
+                dup = nextDup;
+              }
+              dup = dup.next;
+            }
+            curr = curr.next;
+          }
         }
 
         append(value) {
@@ -61,7 +92,7 @@
           if (!this.head) {
             this.head = node;
             this.tail = node;
-            return
+            return;
           }
           node.prev = this.tail;
           this.tail.next = node;
@@ -79,20 +110,18 @@
         }
       }
 
-    
+      let numbers = [1, 1,2, 3, 4, 5, 2, 6, 3, 7, 8, 5, 9, 10];
+      const dl = new DoubleLinkedList();
+      numbers.forEach((data) => {
+        dl.append(data);
+      });
 
-
-    const dl = new DoubleLinkedList()
-    for(let i = 1 ;i<=5;i++){
-        dl.append(i)
-    }
-    // dl.deleteByValue(3)
-    dl.print()
-    console.log(dl.head);
-    
-    
-
-
+      // dl.deleteByValue(3)
+      // dl.reverse()
+      dl.print();
+      dl.removeDuplicates();
+      dl.print();
+      console.log(dl.head);
     </script>
   </body>
 </html>
