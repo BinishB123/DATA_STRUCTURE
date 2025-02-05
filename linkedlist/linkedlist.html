@@ -14,6 +14,8 @@
       }
     }
 
+
+
     class LinkedList {
       constructor() {
         this.head = null;
@@ -27,6 +29,19 @@
           secondRunner = secondRunner.next.next;
         }
         console.log("middleElement", firstRunner.value);
+      }
+
+      reverse(){
+        let node = this.head
+        let prev =  null
+        let next = null
+        while (node) {
+          next = node.next
+          node.next = prev
+          prev=node
+          node= next
+        }
+        this.head = prev
       }
 
       findTheSecondLargest() {
@@ -101,10 +116,10 @@
     for (let i = 1; i <= 3; i++) {
       ll.append(i);
     }
-    ll.deleteByValue(4);
+    ll.reverse()
     ll.print();
     ll.findTheMiddleElement();
-    ll.findTheSecondLargest();
+    ll.findTheSecondLargest();  
     console.log(ll.head);
   </script>
 </html>
