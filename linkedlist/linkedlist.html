@@ -42,6 +42,28 @@
         this.head = prev
       }
 
+      removeDuplicates(){
+        let curr = this.head
+        while (curr) {
+          let dup = curr.next
+          let prev = curr
+          while (dup) {
+            if (dup.value===curr.value) {
+             let nextDup = dup.next
+             prev.next = dup.next
+             dup = nextDup
+            }else{
+              prev = dup
+              dup = dup.next
+              
+            }
+
+          }
+          curr =curr.next
+
+        }
+      }
+
 
 
       findTheSecondLargest() {
@@ -118,6 +140,8 @@
       numbers.forEach((data) => {
         ll.append(data);
       });
+      ll.removeDuplicates()
+
    ll.print()
   </script>
 </html>
