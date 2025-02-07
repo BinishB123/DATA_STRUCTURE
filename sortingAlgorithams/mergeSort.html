@@ -7,36 +7,41 @@
   </head>
   <body>
     <script>
-      function mergeSort(arr) {
-        if (arr.length < 2) 
-        {
-            return arr
+      function mergeSort(arr, depth = 0) {
+    if (arr.length < 2) {
+        return arr; // Base case: Already sorted if the array has 1 or 0 elements.
+    }
+
+    let mid = Math.floor(arr.length / 2);
+    let left = arr.slice(0, mid);
+    let right = arr.slice(mid);
+
+    console.log("Depth:", depth, "| Left:", left, "| Right:", right);
+
+    return merge(mergeSort(left, depth + 1), mergeSort(right, depth + 1));
+}
+
+function merge(left, right) {
+    let sortedArray = [];
+    let i = 0, j = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) {
+            sortedArray.push(left[i]);
+            i++;
+        } else {
+            sortedArray.push(right[j]);
+            j++;
         }
-        const midIndex = Math.floor(arr.length / 2);
-        const left = arr.slice(0, midIndex);
-        const right = arr.slice(midIndex); 
-          
-             
-        return merge(mergeSort(left), mergeSort(right));
-      }
-      function merge(left, right) {
-        let sorted = [];
-        while (left.length  && right.length ) {
-          if (left[0] <= right[0]) {
-            sorted.push(left.shift());
-          } else  {
-            sorted.push(right.shift());
-          }
-        }
-        console.log(...sorted, ...left, ...right);
-        
-        return [...sorted, ...left, ...right];
-      }
-       const arr = [1,4,5,6,2,3,4,4]
-       console.log(arr);
-       
-       console.log(mergeSort(arr));
-       
+    }
+
+    // Push remaining elements (if any)
+    return [...sortedArray, ...left.slice(i), ...right.slice(j)];
+}
+console.log("[1, 2344, 67, 895, 5, 4, 4, 4, 4433, 2]");
+
+console.log("Sorted Array:", mergeSort([1, 2344, 67, 895, 5, 4, 4, 4, 4433, 2]));
+
 
     </script>
   </body>
