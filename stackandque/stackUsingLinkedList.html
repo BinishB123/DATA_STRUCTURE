@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Node {
+            constructor(value){
+                this.value = value
+                this.next = null
+            }
+
+        }
+        class StackUsingLinkedList{
+            constructor(){
+                this.head = null
+            }
+
+            push(value){
+                const node = new Node(value)
+                
+                if (!this.head) {
+                    this.head = node
+                    return
+                }
+                let curr = this.head
+                while (curr.next) {
+                    curr = curr.next
+                }
+                curr.next = node
+            }
+
+            pop(){
+                let curr = this.head
+                let prev = this.head
+                while (curr.next) {
+                  prev = curr
+                  curr = curr.next
+                }
+                prev.next = null
+            }
+
+            print(){
+                let curr = this.head
+                let values = " "
+                while (curr) {
+                    values+=` ${curr.value}`
+                    curr = curr.next 
+                }
+                console.log(values);
+                
+            }
+
+        }
+
+        const ll = new StackUsingLinkedList()
+        for(let i= 1;i<=1;i++){
+            ll.push(i)
+        }
+        console.log(ll.head);
+        ll.pop()
+        ll.print()
+    </script>
+    
+</body>
+</html>

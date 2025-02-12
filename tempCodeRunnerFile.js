@@ -1,0 +1,1 @@
+console.log(binarySearch(arr,Math.floor(arr.length/2)),0,arr.length-1,9); 
